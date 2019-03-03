@@ -67,7 +67,7 @@ function watchChange() {
     watch('src/js/*.js', series(js, browserSyncReload));
     watch('src/css/*.css', series(css, browserSyncReload));
     watch('src/**/*.html', series(html, sassify_me, browserSyncReload));
-    watch('src/assets/**', series(assets, sassify_me, browserSyncReload));
+    watch('src/assets/**', series(assets, browserSyncReload));
 }
 
 browserSyncReload
