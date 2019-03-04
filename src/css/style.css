@@ -1,9 +1,16 @@
 body {
-  background: green; }
+  background: green;
+}
 
 .demo {
-  display: block;
-  z-index: 51; }
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 51;
+  -webkit-filter: 1;
+  filter: 1;
+}
 
 .clients {
-  color: white; }
+  color: white;
+}

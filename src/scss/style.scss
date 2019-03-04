@@ -5,8 +5,9 @@ body {
 }
 
 .demo {
-    display: block;
+    display: flex;
     z-index: 51;
+    filter: 1;
 }
 
 .clients {

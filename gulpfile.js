@@ -4,6 +4,8 @@ const watch = require('gulp-watch');
 const sass = require('gulp-sass');
 const minifyCSS = require('gulp-csso');
 const concat = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
 const purgecss = require('gulp-purgecss');
 const browsersync = require("browser-sync").create();
 
@@ -12,26 +14,26 @@ const browsersync = require("browser-sync").create();
 function html() {
     return src('src/**/*.html')
         .pipe(dest('dist/'))
-    //.pipe(browsersync.stream());
 }
 
 function assets() {
     return src('src/assets/**')
         .pipe(dest('dist/assets/'))
-    // .pipe(browsersync.stream());
 }
 
 function css() {
     return src('src/css/*.css')
-        .pipe(sass())
         .pipe(minifyCSS())
         .pipe(dest('dist/css'))
-    // .pipe(browsersync.stream());
 }
 
 function sassify_me() {
     return src('src/scss/*.scss')
-        .pipe(sass())
+        .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 5 versions'],
+            cascade: false
+        }))
         .pipe(purgecss({
             content: ["src/**/*.html"]
         }))
@@ -42,7 +44,6 @@ function js() {
     return src('src/js/*.js', { sourcemaps: true })
         .pipe(concat('app.min.js'))
         .pipe(dest('dist/js', { sourcemaps: true }))
-    //.pipe(browsersync.stream());
 }
 
 // BrowserSync
